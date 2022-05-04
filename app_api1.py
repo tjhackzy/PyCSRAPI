@@ -69,42 +69,50 @@ def generatecsrfn(country, state, location, org, orgunit, commonname, keysize):
 @app.route('/', methods=['GET'])
 def welcome():
     return "CSR Generator is working..."
+    
 
 @app.route('/generate', methods=['POST'])
+@cross_origin()
 def generatecsr():
     ret_obj = request.get_json()
     commonname = ret_obj.get("commonname")
     
     if(commonname is None):
         f_result = { "csr" : "", "key" : "" , "error":"common name is a required field." }
-        return json.dumps(f_result),400
+        response_final = json.dumps(f_result)        
+        return response_final,400
     
     country = ret_obj.get("country")
     if(country is None):
         f_result = { "csr" : "", "key" : "" , "error":"country is a required field." }
-        return json.dumps(f_result),400
+        response_final = json.dumps(f_result)        
+        return response_final,400
     
     state = ret_obj.get("state")
     if(state is None):
         f_result = { "csr" : "", "key" : "" , "error":"state is a required field." }
-        return json.dumps(f_result),400
+        response_final = json.dumps(f_result)        
+        return response_final,400
     
     locality = ret_obj.get("locality")
     if(locality is None):
         f_result = { "csr" : "", "key" : "" , "error":"locality is a required field." }
-        return json.dumps(f_result),400
+        response_final = json.dumps(f_result)        
+        return response_final,400
     
     organization = ret_obj.get("organization")
     if(organization is None):
         f_result = { "csr" : "", "key" : "" , "error":"organization is a required field." }
-        return json.dumps(f_result),400
+        response_final = json.dumps(f_result)        
+        return response_final,400
     
     organizationunit=ret_obj.get("organizationunit")
     #print(organizationunit)
     keysize = ret_obj.get("keysize")
     final_result_json = generatecsrfn(country,state,locality,organization, organizationunit, commonname, keysize)
     f_result = { "csr" : final_result_json[0], "key" : final_result_json[1] , "error":"" }
-    return json.dumps(f_result)
+    response_final = json.dumps(f_result)    
+    return response_final
     
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=11055)
