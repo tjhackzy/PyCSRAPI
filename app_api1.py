@@ -4,8 +4,11 @@ import uuid
 import shutil
 import json
 from flask import Flask, jsonify, request
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
    
 def generatecsrfn(country, state, location, org, orgunit, commonname, keysize):
@@ -67,7 +70,8 @@ def generatecsrfn(country, state, location, org, orgunit, commonname, keysize):
 
 
 @app.route('/', methods=['GET'])
-def welcome():
+@cross_origin()
+def welcome():    
     return "CSR Generator is working..."
     
 
