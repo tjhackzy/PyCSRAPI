@@ -1,0 +1,7 @@
+version: '3.3'
+services:
+    pycsrapi:
+        ports:
+            - '11055:11055'
+        restart: always
+        image: tjhackz/pycsrapi
