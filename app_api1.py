@@ -10,7 +10,14 @@ app = Flask(__name__)
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
-   
+
+def is_json(myjson):
+  try:
+    json.loads(myjson)
+  except ValueError as e:
+    return False
+  return True
+
 def generatecsrfn(country, state, location, org, orgunit, commonname, keysize):
     #res1 = os.system("openssl req -new -newkey rsa:2048 -nodes -out jayv123_com.csr -keyout jayv123_com.key -subj ""/C=IN/ST=Gujarat/L=Ahmedabad/O=Ttest org/OU=IT/CN=jayv123.com""")
     #print(res1)
@@ -72,41 +79,68 @@ def generatecsrfn(country, state, location, org, orgunit, commonname, keysize):
 @app.route('/', methods=['GET'])
 @cross_origin()
 def welcome():    
-    return "CSR Generator is working..."
+    return """<p>
+
+<HTML>
+<TITLE>CSR API Generator</TITLE>
+<head>
+<!-- Place this tag in your head or just before your close body tag. -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+</head>
+<BODY>
+<p>
+CSR Generator API is working...</p>
+<br/>
+<!-- Place this tag where you want the button to render. -->
+<a class="github-button" href="https://github.com/tjhackzy" data-size="large" aria-label="Follow @tjhackzy on GitHub">Follow @tjhackzy</a>
+
+<!-- Place this tag where you want the button to render. -->
+<a class="github-button" href="https://github.com/tjhackzy/PyCSRAPI/fork" data-icon="octicon-repo-forked" data-size="large" aria-label="Fork tjhackzy/PyCSRAPI on GitHub">Fork</a>
+
+<!-- Place this tag where you want the button to render. -->
+<a class="github-button" href="https://github.com/tjhackzy/PyCSRAPI/archive/HEAD.zip" data-icon="octicon-download" data-size="large" aria-label="Download tjhackzy/PyCSRAPI on GitHub">Download</a>
+
+</BODY></HTML>
+"""
     
 
 @app.route('/generate', methods=['POST'])
 @cross_origin()
 def generatecsr():
+    if (is_json(request.data) is False):
+        f_result = { "csr" : "", "key" : "" , "error":"Missing Json in Request." }
+        response_final = json.dumps(f_result)
+        return response_final,400
+
     ret_obj = request.get_json()
     commonname = ret_obj.get("commonname")
     
     if(commonname is None):
-        f_result = { "csr" : "", "key" : "" , "error":"common name is a required field." }
+        f_result = { "csr" : "", "key" : "" , "error":"Common name is a required field." }
         response_final = json.dumps(f_result)        
         return response_final,400
     
     country = ret_obj.get("country")
     if(country is None):
-        f_result = { "csr" : "", "key" : "" , "error":"country is a required field." }
+        f_result = { "csr" : "", "key" : "" , "error":"Country is a required field." }
         response_final = json.dumps(f_result)        
         return response_final,400
     
     state = ret_obj.get("state")
     if(state is None):
-        f_result = { "csr" : "", "key" : "" , "error":"state is a required field." }
+        f_result = { "csr" : "", "key" : "" , "error":"State is a required field." }
         response_final = json.dumps(f_result)        
         return response_final,400
     
     locality = ret_obj.get("locality")
     if(locality is None):
-        f_result = { "csr" : "", "key" : "" , "error":"locality is a required field." }
+        f_result = { "csr" : "", "key" : "" , "error":"Locality is a required field." }
         response_final = json.dumps(f_result)        
         return response_final,400
     
     organization = ret_obj.get("organization")
     if(organization is None):
-        f_result = { "csr" : "", "key" : "" , "error":"organization is a required field." }
+        f_result = { "csr" : "", "key" : "" , "error":"Organization is a required field." }
         response_final = json.dumps(f_result)        
         return response_final,400
     
