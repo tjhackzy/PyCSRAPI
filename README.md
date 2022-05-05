@@ -65,6 +65,20 @@ $ docker run -p 11055:11055 -d tjhackz/pycsrapi
 
 ### 3 - Docker Compose 
 
+```yml
+version: '3.3'
+services:
+    pycsrapi:
+        ports:
+            - '11055:11055'
+        restart: always
+        image: tjhackz/pycsrapi
+```
+
+### Docker Hub URL : https://hub.docker.com/repository/docker/tjhackz/pycsrapi
+
+
 
 To Do:
-Will add one Nice GUI at /gui path. WIP.
+Will add one Nice GUI at /gui path. 
+WIP.
