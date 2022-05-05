@@ -9,7 +9,7 @@ Afterwards, deletes both .key & .csr files from physical disk, returns it back t
 Usage : (Flask will run on 11055, change it in main .py file)
 
 curl --request POST \
-  --url http://192.168.100.163:11055/generate \
+  --url http://127.0.0.1:11055/generate \
   --header 'Content-Type: application/json' \
   --data '{
 	"commonname": "testing123.com",
