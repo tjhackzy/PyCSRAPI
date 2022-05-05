@@ -19,33 +19,25 @@ def is_json(myjson):
   return True
 
 def generatecsrfn(country, state, location, org, orgunit, commonname, keysize):
-    #res1 = os.system("openssl req -new -newkey rsa:2048 -nodes -out jayv123_com.csr -keyout jayv123_com.key -subj ""/C=IN/ST=Gujarat/L=Ahmedabad/O=Ttest org/OU=IT/CN=jayv123.com""")
-    #print(res1)
-
-    #print(orgunit)
+    
     dirname=str(uuid.uuid4())
     algo_size = "rsa:"+ str(keysize)
-    #f_prm = "/C="+country+"/ST="+state+"/L="+location+"/O="+org+"/OU="+orgunit+"/CN=" + commonname
+    
     
     f_prm_2 = "/C="+country+"/ST="+state+"/L="+location+"/O="+org+"/CN=" + commonname
-    
-    #print(f_prm_2)
-    
+       
     if (orgunit):
         f_prm_2 = f_prm_2 + "/OU="+ str(orgunit)
     
-    #print(f_prm_2)
+
     subprocess.run(["mkdir",dirname])
-    #res2 = subprocess.run(["pwd"])
-    #strdir = res2 + "/" + dirname
     res2 = os.getcwd()
     strdir = os.path.join(res2, dirname)
     os.chdir(strdir)
     
     
     result_final = subprocess.run(["openssl","req","-new", "-newkey", algo_size,"-nodes","-out", "mycsr.csr", "-keyout" ,"mykey.key", "-subj",f_prm_2], capture_output=True, text=True)
-    #print("stdout:", result_final.stdout)
-    #print("stderr:", result_final.stderr)
+
     test_csr_path = os.path.join(strdir, "mycsr.csr")
     test_key_path = os.path.join(strdir, "mykey.key")
     
@@ -57,13 +49,8 @@ def generatecsrfn(country, state, location, org, orgunit, commonname, keysize):
     
     test_csr.close()
     test_key.close()
-    
-    #print(data_csr)
-    #print(data_key)
-    
+       
     f_result = { "csr" : data_csr, "key" : data_key }
-    
-    #print(json.dumps(f_result))
     
     path_parent = os.path.dirname(os.getcwd())
 
@@ -145,7 +132,6 @@ def generatecsr():
         return response_final,400
     
     organizationunit=ret_obj.get("organizationunit")
-    #print(organizationunit)
     keysize = ret_obj.get("keysize")
     final_result_json = generatecsrfn(country,state,locality,organization, organizationunit, commonname, keysize)
     f_result = { "csr" : final_result_json[0], "key" : final_result_json[1] , "error":"" }
