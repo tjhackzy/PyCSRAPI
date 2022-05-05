@@ -2,7 +2,7 @@
   "name": "CSR Generator API",
   "description": "A barebones Flask Api & app to generate CSR on the fly.",
   "repository": "https://github.com/tjhackzy/PyCSRAPI",
-  "logo": "https://cdn-icons.flaticon.com/png/512/4649/premium/4649581.png?token=exp=1651723201~hmac=b02d773f689380e27ba1eafc9c6bf56a",
+  "logo": "https://icons.iconarchive.com/icons/hopstarter/sleek-xp-basic/256/Document-icon.png",
   "keywords": ["python", "flask", "api", "csr", "certificate"],
   "success_url": "/"
 }
