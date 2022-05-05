@@ -75,7 +75,9 @@ services:
         image: tjhackz/pycsrapi
 ```
 
-### Docker Hub URL : https://hub.docker.com/repository/docker/tjhackz/pycsrapi
+### Docker Hub URL : https://hub.docker.com/r/tjhackz/pycsrapi
+### GitHub URL : https://github.com/tjhackzy/PyCSRAPI
+
 
 
 
