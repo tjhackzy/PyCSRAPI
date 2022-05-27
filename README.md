@@ -13,6 +13,8 @@ Afterwards, deletes both .key & .csr files from physical disk, returns it back t
 
 Python Flask app (api) to generate the certificate signing request.
 
+Supports AMD and ARM architectures.
+
 ### Prerequisities
 
 
