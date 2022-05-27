@@ -5,8 +5,11 @@ Internally, this will call up openssl shell command, generate signing request an
 Afterwards, deletes both .key & .csr files from physical disk, returns it back to response. 
 
 ## Deploy on Heroku
-[![Deploy on Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy){:target="_blank"}
+<a href="https://heroku.com/deploy" target="_blank"><img src="https://www.herokucdn.com/deploy/button.svg" /></a>
 
+<!---
+[![Deploy on Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+-->
 
 
 ## Getting Started
@@ -20,8 +23,8 @@ Supports AMD and ARM architectures.
 
 In order to run this you'll need one of the following OS/docker installed:
 
-* [OS X](https://docs.docker.com/mac/started/){:target="_blank"}
-* [Linux](https://docs.docker.com/linux/started/){:target="_blank"}
+* [OS X](https://docs.docker.com/mac/started/)
+* [Linux](https://docs.docker.com/linux/started/)
 
 ### Usage
 
