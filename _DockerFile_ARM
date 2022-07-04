@@ -9,7 +9,7 @@ WORKDIR /app
 RUN apk add openssl
 RUN pip install -r requirements.txt
 
-COPY . /app
+COPY ./app_api1.py /app/app_api1.py
 
 ENTRYPOINT [ "python" ]
 
